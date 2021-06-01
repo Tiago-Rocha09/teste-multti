@@ -2,6 +2,7 @@
 Após clonar o projeto
 
 yarn install
+
 yarn start
 
 # Getting Started with Create React App
