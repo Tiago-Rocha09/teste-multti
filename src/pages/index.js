@@ -44,7 +44,7 @@ function Body() {
     const [filteredData, setFilteredData] = useState([])
     
     //texto do campo de busca
-    const [searchText, setSearchText] = useState()
+    const [searchText, setSearchText] = useState('')
     
     //dados
     const [data, setData] = useState([
@@ -170,13 +170,27 @@ function Body() {
     function changeActiveTab(tab) {
         console.log(tab);
         if (tab === 0) {
-            setFilteredData(data.filter( a => ( a.nome && a.nome.toLowerCase().includes(searchText.toLowerCase()))  ))
+            if (searchText.length > 2) {
+                setFilteredData(data.filter( a => ( a.nome && a.nome.toLowerCase().includes(searchText.toLowerCase()))  ))
+            }else{
+                setFilteredData(data)
+            }
         } else if(tab === 1){
-            let dataTemp = data.filter(a => ( a.nome && a.nome.toLowerCase().includes(searchText.toLowerCase())));
+            let dataTemp = []
+            if (searchText.length > 2) {
+                dataTemp = data.filter(a => ( a.nome && a.nome.toLowerCase().includes(searchText.toLowerCase())));
+            }else{
+                dataTemp = data;
+            }
             dataTemp = dataTemp.filter( a => a.situacao === 1);
             setFilteredData(dataTemp)
         }else{
-            let dataTemp = data.filter(a => ( a.nome && a.nome.toLowerCase().includes(searchText.toLowerCase())));
+            let dataTemp = [];
+            if (searchText.length > 2) {
+                dataTemp = data.filter(a => ( a.nome && a.nome.toLowerCase().includes(searchText.toLowerCase())));
+            }else{
+                dataTemp = data;
+            }
             dataTemp = dataTemp.filter( a => a.situacao === 2);
             setFilteredData(dataTemp)
         }
